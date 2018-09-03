@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-#start resin-wifi-connect
+#start wifi-connect.  This will start an access point if none is found
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 ./wifi-connect
 
@@ -10,10 +10,7 @@ echo "Setting time zone to ${TIMEZONE=UTC}"
 echo "${TIMEZONE}" > /etc/timezone
 dpkg-reconfigure tzdata
 
-# Replace this below with your own application start
-# It just idles in this example.
 # GoogleKey will be passed from Resin
-
 python /app/ETAclock.py ${GOOGLEKEY}
 
 done
