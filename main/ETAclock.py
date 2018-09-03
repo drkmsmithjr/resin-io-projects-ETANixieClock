@@ -271,7 +271,7 @@ try:
       dest,orig = pickle.load(f)
 except:
    with open(locatefile,'w') as f:
-      pick.dump((dest,orig),f)
+      pickle.dump((dest,orig),f)
 
 #global parameters for interupt.  Needs to be as larger as dest array below
 TravelDuration = [0]*len(dest)
