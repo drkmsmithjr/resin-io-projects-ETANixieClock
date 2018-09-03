@@ -3,9 +3,6 @@ FROM resin/%%RESIN_MACHINE_NAME%%-python
 # Enable systemd
 ENV INITSYSTEM on
 
-# set Timezone
-# ENV TZ=America/Los_Angeles
-
 # Install Python.
 RUN apt-get update \
 	&& apt-get install -y python \
@@ -23,4 +20,4 @@ COPY . /app
 
 # run python script when container lands on device
 CMD ["bash", "/app/start.sh"]
-#CMD ["python", "/app/ETAclock.py"]
+
