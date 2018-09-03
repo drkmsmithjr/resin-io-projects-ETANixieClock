@@ -7,7 +7,21 @@ ENV INITSYSTEM on
 RUN apt-get update \
 	&& apt-get install -y python \
 	# Remove package lists to free up space
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/* 
+
+# install wireless tool
+RUN apt-get install -y dnsmasq wireless-tools \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /usr/scr/app
+
+RUN curl https://api.github.com/repos/resin-io/resin-wifi-connect/releases/latest -s \
+    | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
+    | xargs -n1 curl -Ls \
+    | tar -xvz -C /usr/src/app/   
+
+RUN pip install --upgrade pip
 
 COPY ./requirements.txt /requirements.txt 
 RUN pip install -r /requirements.txt

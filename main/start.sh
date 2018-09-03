@@ -1,5 +1,12 @@
 #!/usr/bin/bash
 
+# run the process loop
+python src/process.py
+
+#start resisn-wifi-connect
+export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+./resin-wifi-connect --clear=false
+
 # Default to UTC if no TIMEZONE env variable is set
 echo "Setting time zone to ${TIMEZONE=UTC}"
 # This only works on Debian-based images
