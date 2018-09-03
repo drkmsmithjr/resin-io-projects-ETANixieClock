@@ -269,7 +269,7 @@ try:
    with open(locatefile,'r') as f:
       dest,orig = pickle.load(f)
 except IOError:
-   with open(locatefile,'r') as f:
+   with open(locatefile,'w') as f:
       pick.dump((dest,orig),f)
 
 #global parameters for interupt.  Needs to be as larger as dest array below
