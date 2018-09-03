@@ -1,0 +1,8 @@
+version: '2'
+volumes: 
+    resin-data:
+services:
+    example:
+        build: ./example
+        volumes: 
+            - 'resin-data:/data'
