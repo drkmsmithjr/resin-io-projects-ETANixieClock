@@ -9,3 +9,5 @@ services:
         privileged: true
         restart: always
         network_mode: host
+        labels:
+           io.resin.features.dbus: '1'
