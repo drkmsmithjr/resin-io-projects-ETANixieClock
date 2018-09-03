@@ -2,7 +2,7 @@ version: '2'
 volumes: 
     resin-data:
 services:
-    example:
-        build: ./example
+    main:
+        build: ./main
         volumes: 
             - 'resin-data:/data'
