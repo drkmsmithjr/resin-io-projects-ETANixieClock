@@ -269,7 +269,7 @@ locatefile = "/data/locations.txt"
 try:
    with open(locatefile,'r') as f:
       dest,orig = pickle.load(f)
-except IOError:
+except:
    with open(locatefile,'w') as f:
       pick.dump((dest,orig),f)
 
