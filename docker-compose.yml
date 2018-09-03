@@ -6,5 +6,6 @@ services:
         build: ./main
         volumes: 
             - 'resin-data:/data'
-    privileged: true
-    restart: always
+        privileged: true
+        restart: always
+        network_mode: host
