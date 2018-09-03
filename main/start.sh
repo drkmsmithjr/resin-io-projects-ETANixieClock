@@ -1,9 +1,6 @@
 #!/usr/bin/bash
 
-# run the process loop
-python /app/src/process.py
-
-#start resisn-wifi-connect
+#start resin-wifi-connect
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 ./resin-wifi-connect --clear=false
 
