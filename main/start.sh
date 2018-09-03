@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # run the process loop
-python src/process.py
+python /app/src/process.py
 
 #start resisn-wifi-connect
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
