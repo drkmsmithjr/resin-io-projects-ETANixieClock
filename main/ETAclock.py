@@ -237,6 +237,7 @@ def updateETA():
          TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
          TravelDurText[x] = directions_result[0]['legs'][0]['duration']['text']  
          print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
+   
 
 
 # Main Loop
@@ -257,10 +258,19 @@ dest[0] = {'toplace':'trestles','toaddress':'S El Camino Real, San Clemente, CA 
 dest[1] = {'toplace':'huntington','toaddress':'21 Huntington Beach Pier, Huntington Beach, CA 92648'}
 dest[2] = {'toplace':'scripts','toaddress':'8564 El Paseo Grande, La Jolla, CA 92037'}
 dest[3] = {'toplace':'airport','toaddress':'18601 Airport Way, Santa Ana, CA 92707'}
-
-# clock location
+# clock location address
 orig = "25300 Harbor Drive, Dana Point, CA 92629"
 
+locatefile = "/data/locations.txt"
+
+# check to see if the locations.txt file exists.  If it does not then create it.   
+# otherwise, read
+try:
+   with open(locatefile,'r') as f:
+      dest,orig = pickle.load(f)
+except IOError:
+   with open(locatefile,'r') as f:
+      pick.dump((dest,orig),f)
 
 #global parameters for interupt.  Needs to be as larger as dest array below
 TravelDuration = [0]*len(dest)
