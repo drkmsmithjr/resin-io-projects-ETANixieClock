@@ -10,6 +10,7 @@ import time
 import sys
 from time import sleep
 from threading import Timer
+import pickle
 
 # this timer will sychronize to system time time.time().   Great for clocks
 class RepeatedSyncTimer(object):
