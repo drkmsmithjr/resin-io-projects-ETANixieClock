@@ -1,5 +1,5 @@
 # resin-io-projects-ETANixieClock
-This project takes the ETANixieClock Raspberry pi project and converts it into a Resin-io Docker Device.  The goal is to allow on the fly updates of the code.    
-It will require two appliation parameters to be sent to the Docker Containter.   
-1. The GOOGLEKEY is the client key you get from google for a google maps account.
-2. The TIMEZONE paramater is the set to you time zone.  For example, 'America/Los_Angeles'
+This project takes the [ETANixieClock](https://wp.me/p85ddV-Ad) Raspberry pi project and converts it into a Resin-io Docker Device.  The goal is to allow on the fly updates of the code along with a method to maintian persistant data when the code is updated.    It also includes a way to externally setup a wifi connection when a valid wifi is not available, by converting the Raspberry Pi into an Access Point.   This method follows examples from the [Resin-io repository](https://github.com/resin-io-projects/resin-wifi-connect-example)
+For the Resin-io dashboard, two appliation parameters per device are needed to be sent to the Docker Containter.   
+1. The GOOGLEKEY is the client key you get from google for a google maps account.  This is a good way to keep this private.   See instructions in the BLOG on how to get this client Key.
+2. The TIMEZONE paramater is the set to you time zone.  For example, 'America/Los_Angeles'.   See the entry at [Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) for a valid timezone name.    
