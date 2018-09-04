@@ -2,7 +2,7 @@
 
 #start wifi-connect.  This will start an access point if none is found
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
-./wifi-connect --portal-ssid="ETANixieClock Connect" --activity-timeout=10
+./wifi-connect --portal-ssid="ETANixieClock Connect" --activity-timeout=15
 
 # Default to UTC if no TIMEZONE env variable is set
 echo "Setting time zone to ${TIMEZONE=UTC}"
