@@ -13,4 +13,4 @@ dpkg-reconfigure tzdata
 # GoogleKey will be passed from Resin
 #python /app/ETAclock.py ${GOOGLEKEY}
 
-done
+
