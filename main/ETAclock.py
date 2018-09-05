@@ -314,13 +314,25 @@ timerETA = RepeatedSyncTimer(updateETATime,updateETA)
 
 print("after timer thread call")
 
+# burnin start time
+# burnin stop time
+
 while GoodArgs:
-   # update the traffic every 4 minutes (see the sleep command)
-   #testinput = raw_input("Do you want to stop: Y or Yes")
+   # update the sampling every second minutes (see the sleep command)
+   # testinput = raw_input("Do you want to stop: Y or Yes")
+   # If the time is after is between 2-5 AM
+   # whenever the PIR_SENSE = False. 
+   # turn off the PIR_SENSOR   
+   # rt.stop() and timer.stop()
+   # Burn in [3,4,9,0]
+   # Burn in time 30 minutes for each digit until the are all done
+   # cycle the digits in order
+   # else turn on the PIR_SENSOR
+   # restart the rt.start() and time.start()
    #if testinput == 'Y' or testinput == 'Yes':
    #   break
    # update the trafic every 4 minutes usage to stay under free usage limit 
-   sleep(40)
+   sleep(1)
    #break
    
 

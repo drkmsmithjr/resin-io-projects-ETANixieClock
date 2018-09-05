@@ -24,7 +24,6 @@ class NixieTube():
         self.elements = elements
         # the displayed Digits to keep track of current state.  Initially empty
         # digits and StoredDigits will be a array of integers representing the digits to be displayed
-        
 
         self.StoredDigits = []
         # the data that will be transferred to update the display
