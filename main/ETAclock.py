@@ -317,9 +317,36 @@ print("after timer thread call")
 # burnin start time
 # burnin stop time
 
-while GoodArgs:
-   # update the sampling every second minutes (see the sleep command)
-   # testinput = raw_input("Do you want to stop: Y or Yes")
+
+# Burnin Times
+BurnInMinutes = 20
+BurnInStart = 2
+BurnInStop = 7
+DigitsToTest = [3,4,9,0,1,2,5,6,7,8]
+DigitsTimeTest = [1,1,1,.1,.1,.1,.1,.1,.1,.1]
+DigIndex = 0
+SecIndex = 0
+BurnInSec = BurnInMinutes*60
+
+   while GoodArgs:
+
+   # HardCode the Burnin
+      while PIR_SENSE == False:
+         TestTime = datetime.datetime.now()
+         if datetime.datetime.now().hour > BurnInStart and datetime.datetime.now().hour < BurnInStop :
+            # stop all clocks
+            rt.stop()
+            timerETA.stop()
+            Dig = DigitsToTest[DigIndex]
+            DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
+            SecIndex += 1
+            if SecIndex > BurnInSec:
+               SecIndex = 0
+               DigIndex += 1
+               if DigIndex > 9:
+                  DigIndex = 0    
+      rt.start()
+      timeETA.start()  
    # If the time is after is between 2-5 AM
    # whenever the PIR_SENSE = False. 
    # turn off the PIR_SENSOR   
