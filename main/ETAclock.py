@@ -320,7 +320,7 @@ print("after timer thread call")
 
 # Burnin Times
 BurnInMinutes = 20
-BurnInStart = 2
+BurnInStart = 1
 BurnInStop = 7
 DigitsToTest = [3,4,9,0,1,2,5,6,7,8]
 DigitsTimeTest = [1,1,1,.1,.1,.1,.1,.1,.1,.1]
@@ -328,25 +328,25 @@ DigIndex = 0
 SecIndex = 0
 BurnInSec = BurnInMinutes*60
 
-   while GoodArgs:
+while GoodArgs:
 
    # HardCode the Burnin
-      while PIR_SENSE == False:
-         TestTime = datetime.datetime.now()
-         if datetime.datetime.now().hour > BurnInStart and datetime.datetime.now().hour < BurnInStop :
-            # stop all clocks
-            rt.stop()
-            timerETA.stop()
-            Dig = DigitsToTest[DigIndex]
-            DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
-            SecIndex += 1
-            if SecIndex > BurnInSec:
-               SecIndex = 0
-               DigIndex += 1
-               if DigIndex > 9:
-                  DigIndex = 0    
-      rt.start()
-      timeETA.start()  
+   while PIR_SENSE == False:
+      TestTime = datetime.datetime.now()
+      if datetime.datetime.now().hour > BurnInStart and datetime.datetime.now().hour < BurnInStop :
+      # stop all clocks
+         rt.stop()
+         timerETA.stop()
+         Dig = DigitsToTest[DigIndex]
+         DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
+         SecIndex += 1
+         if SecIndex > BurnInSec:
+            SecIndex = 0
+            DigIndex += 1
+            if DigIndex > 9:
+               DigIndex = 0    
+   rt.start()
+   timeETA.start()  
    # If the time is after is between 2-5 AM
    # whenever the PIR_SENSE = False. 
    # turn off the PIR_SENSOR   
@@ -359,7 +359,7 @@ BurnInSec = BurnInMinutes*60
    #if testinput == 'Y' or testinput == 'Yes':
    #   break
    # update the trafic every 4 minutes usage to stay under free usage limit 
-   sleep(1)
+sleep(1)
    #break
    
 
