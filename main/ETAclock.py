@@ -337,6 +337,7 @@ while GoodArgs:
       # stop all clocks
          rt.stop()
          timerETA.stop()
+         DigitSec.Pir_Sensor_Off()
          Dig = DigitsToTest[DigIndex]
          DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
          SecIndex += 1
@@ -344,7 +345,8 @@ while GoodArgs:
             SecIndex = 0
             DigIndex += 1
             if DigIndex > 9:
-               DigIndex = 0    
+               DigIndex = 0  
+   DigitSec.Pir_Sensor_On()  
    rt.start()
    timeETA.start()  
    # If the time is after is between 2-5 AM

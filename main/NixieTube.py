@@ -170,14 +170,14 @@ class NixieTube():
            time.sleep(.001)     
 
    def Power_On(self):
-        if self.POWER_ON == False and self.PIR_SENSE:
+        if self.POWER_ON == False and self.PIR_SENSE and self.PIR_SENSOR:
         #if self.POWER_ON == False:
            GPIO.output(N_EN_PowerSupply,GPIO.LOW)
            self.POWER_ON = True 
            time.sleep(0.100)    
 
    def Power_On_Nodelay(self):
-        if self.POWER_ON == False and self.PIR_SENSE:
+        if self.POWER_ON == False and self.PIR_SENSE and self.PIR_SENSOR:
         #if self.POWER_ON == False:
            GPIO.output(N_EN_PowerSupply,GPIO.LOW)
            self.POWER_ON = True 
