@@ -92,6 +92,8 @@ class NixieTube():
            print(self.PIR_SENSE,self.CurrentDelay,GPIO.input(PIR_SENSE))
            next_call = next_call + PirSampling
            time.sleep(next_call - time.time())
+        else:
+           self.PIR_SENSE = True
                 
    def digitsToSerial (self,digits,BlankCntrl = []):
         # this routine will conver the digits into the correct serial string.       
