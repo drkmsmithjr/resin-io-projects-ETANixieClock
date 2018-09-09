@@ -342,9 +342,9 @@ print("after timer thread call")
 # Burnin Times
 BurnInMinutes = 20
 BurnInStart = 20
-BurnInStop = 22
+BurnInStop = 22ps
 DigitsToTest = [3,4,9,0,1,2,5,6,7,8]
-DigitsTimeTest = [1,1,1,.1,.1,.1,.1,.1,.1,.1]
+DigitsTimeTest = [.75,.75,.75,1,.1,.1,.1,.1,.1,.1]
 DigIndex = 0
 SecIndex = 0
 BurnInSec = BurnInMinutes*60
@@ -363,7 +363,7 @@ while GoodArgs:
 
    print("The Burnin State %s" % DigitSec.BurnIn)
 
-   while DigitSec.PIR_SENSE == False:
+   while DigitSec.PIR_SENSE == False and DigitSec.BurnIn:
       # if it is the burnin time
       if DigitSec.BurnIn: 
          # stop all clocks
