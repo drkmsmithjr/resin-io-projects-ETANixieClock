@@ -371,6 +371,7 @@ while GoodArgs:
          if TimerStopped == False:
             rt.stop()
             timerETA.stop()
+            ind = 0
             TimerStopped = True
          Dig = DigitsToTest[DigIndex]
          DigitSec.Write_Display_No_Off([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
