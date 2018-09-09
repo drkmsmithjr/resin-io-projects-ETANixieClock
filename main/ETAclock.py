@@ -356,16 +356,20 @@ while GoodArgs:
    else:
       DigitSec.BurnIn_Off()
 
+   print("The Burnin State %s" % DigitSec.BurnIn)
+
    while DigitSec.PIR_SENSE == False:
       # if it is the burnin time
       if DigitSec.BurnIn: 
          # stop all clocks
+         print ("We are stopping all Clocks")
          rt.stop()
          timerETA.stop()
          TimerStopped = True
          Dig = DigitsToTest[DigIndex]
          DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
          SecIndex += 1
+         print("The second Index %s" % SecIndex)
          if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
             SecIndex = 0
             DigIndex += 1
