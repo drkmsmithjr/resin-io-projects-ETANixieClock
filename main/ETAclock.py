@@ -351,7 +351,7 @@ while GoodArgs:
    
       #TestTime = datetime.datetime.now()
    # we  need to set the BurnIn State for DigitSec 
-   if TimeForBurnin(BurnInStart, BurnInStop):
+   if TimeForBurnIn(BurnInStart, BurnInStop):
       DigitSec.BurnIn_On()
    else:
       DigitSec.BurnIn_Off()
