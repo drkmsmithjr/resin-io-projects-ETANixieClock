@@ -38,7 +38,13 @@ class RepeatedSyncTimer(object):
       #the timer interval is adjusted to sychronize with real time.  
       # this is important for clocks.  Above this was set at 50% of the interval
       self.next_call += self.interval
-      self._timer = Timer(self.next_call - time.time(), self._run)
+      # test to ensure the self.next_call is greater than time
+      # this is important when restarting the time
+      if self.next_call > time.time:
+         self._timer = Timer(self.next_call - time.time(), self._run)
+      # otherwise just add 1/2 the interval to current time
+      else:
+         self._timer = Timer(0.5*self.interval,self._run)
       self._timer.start()
       self.is_running = True
 
