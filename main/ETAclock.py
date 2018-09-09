@@ -342,7 +342,7 @@ print("after timer thread call")
 # Burnin Times
 BurnInMinutes = 20
 BurnInStart = 20
-BurnInStop = 5
+BurnInStop = 22
 DigitsToTest = [3,4,9,0,1,2,5,6,7,8]
 DigitsTimeTest = [1,1,1,.1,.1,.1,.1,.1,.1,.1]
 DigIndex = 0
