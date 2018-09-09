@@ -244,12 +244,12 @@ def TimeForBurnIn(BurnInStart, BurnInStop):
     # determine if we need to acount for day change:
    TestTime = datetime.datetime.now()
    if BurnInStart < BurnInStop:
-      if TestTime.hour > BurnInStart and TestTime.hour < BurnInStop :
+      if TestTime.hour >= BurnInStart and TestTime.hour < BurnInStop :
          return True
       else:
          return False
    else:
-      if (TestTime.hour > BurnInStart and TestTime.hour < 24) or  (TestTime.hour > 0 and TestTime.hour < BurnInStop) :
+      if (TestTime.hour >= BurnInStart and TestTime.hour < 24) or  (TestTime.hour > 0 and TestTime.hour <= BurnInStop) :
          return True
       else:
          return False
