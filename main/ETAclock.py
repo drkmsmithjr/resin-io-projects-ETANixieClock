@@ -363,9 +363,10 @@ while GoodArgs:
       if DigitSec.BurnIn: 
          # stop all clocks
          print ("We are stopping all Clocks")
-         rt.stop()
-         timerETA.stop()
-         TimerStopped = True
+         if TimerStopped == False:
+            rt.stop()
+            timerETA.stop()
+            TimerStopped = True
          Dig = DigitsToTest[DigIndex]
          DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
          SecIndex += 1
@@ -375,9 +376,10 @@ while GoodArgs:
             DigIndex += 1
             if DigIndex > 9:
                DigIndex = 0  
+      sleep(1)
    if TimerStopped:
       rt.start()
-      timeETA.start()  
+      timerETA.start()  
       TimerStopped = False
    
    # update the trafic every 4 minutes usage to stay under free usage limit 
