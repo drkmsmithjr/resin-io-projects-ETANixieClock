@@ -370,7 +370,8 @@ while GoodArgs:
          Dig = DigitsToTest[DigIndex]
          DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
          SecIndex += 1
-         print("The second Index %s" % SecIndex)
+         print("The second Index is: %s" % SecIndex)
+         print("The digit Index is: %s" % DigIndex)
          if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
             SecIndex = 0
             DigIndex += 1
