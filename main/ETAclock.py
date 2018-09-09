@@ -336,8 +336,8 @@ print("after timer thread call")
 
 # Burnin Times
 BurnInMinutes = 20
-BurnInStart = 1
-BurnInStop = 7
+BurnInStart = 20
+BurnInStop = 5
 DigitsToTest = [3,4,9,0,1,2,5,6,7,8]
 DigitsTimeTest = [1,1,1,.1,.1,.1,.1,.1,.1,.1]
 DigIndex = 0
@@ -366,7 +366,7 @@ while GoodArgs:
          Dig = DigitsToTest[DigIndex]
          DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
          SecIndex += 1
-         if SecIndex > BurnInSec:
+         if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
             SecIndex = 0
             DigIndex += 1
             if DigIndex > 9:
