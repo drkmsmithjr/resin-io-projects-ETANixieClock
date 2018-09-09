@@ -86,7 +86,8 @@ class NixieTube():
               self.CurrentDelay = 0
            if self.CurrentDelay > (PirDelay*60):
               self.PIR_SENSE = False
-              self.Power_Off()
+              if (self.BurnIn == False):
+                 self.Power_Off()
               #clamp the currentDelay to max value
               self.CurrentDelay = PirDelay*60+1
            else:
