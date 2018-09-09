@@ -57,6 +57,8 @@ class NixieTube():
         self.PIR_SENSOR = PIR_SENSOR
         #self.PIR_SENSOR = True
         self.PIR_SENSE = True
+        # Burnin State,  Initiate as false
+        self.BurnIn = False
         # PIR delay is in minutes
         self.PirDelay = 1
         GPIO.setup(PIR_SENSE,GPIO.IN)
@@ -172,14 +174,14 @@ class NixieTube():
            time.sleep(.001)     
 
    def Power_On(self):
-        if self.POWER_ON == False and self.PIR_SENSE and self.PIR_SENSOR:
+        if self.POWER_ON == False and (self.PIR_SENSE or self.BurnIn):
         #if self.POWER_ON == False:
            GPIO.output(N_EN_PowerSupply,GPIO.LOW)
            self.POWER_ON = True 
            time.sleep(0.100)    
 
    def Power_On_Nodelay(self):
-        if self.POWER_ON == False and self.PIR_SENSE and self.PIR_SENSOR:
+        if self.POWER_ON == False and (self.PIR_SENSE or self.BurnIn):
         #if self.POWER_ON == False:
            GPIO.output(N_EN_PowerSupply,GPIO.LOW)
            self.POWER_ON = True 
@@ -424,7 +426,13 @@ class NixieTube():
         self.PIR_SENSOR = False
 
    def Pir_Delay_set(self,minutes):
-        self.PirDelay = minutes    
+        self.PirDelay = minutes   
+
+   def BurnIn_Off(self):
+        self.BurnIn = False
+  
+   def BurnIn_On(self):
+        self.BurnIn = True
 
   
 if __name__ == "__main__":

@@ -238,7 +238,23 @@ def updateETA():
          TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
          TravelDurText[x] = directions_result[0]['legs'][0]['duration']['text']  
          print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
+ 
+def TimeForBurnIn(BurnInStart, BurnInStop):
+# burnin start and burn in stops are integers that represent 24 hour HOURS
+    # determine if we need to acount for day change:
+   TestTime = datetime.datetime.now()
+   if BurnInStart < BurnInStop:
+      if TestTime.hour > BurnInStart and TestTime.hour < BurnInStop :
+         return True
+      else:
+         return False
+   else:
+      if (TestTime.hour > BurnInStart and TestTime.hour < 24) or  (TestTime.hour > 0 and TestTime.hour < BurnInStop) :
+         return True
+      else:
+         return False
    
+
 
 
 # Main Loop
@@ -327,39 +343,39 @@ DigitsTimeTest = [1,1,1,.1,.1,.1,.1,.1,.1,.1]
 DigIndex = 0
 SecIndex = 0
 BurnInSec = BurnInMinutes*60
+TimerStopped = False
 
 while GoodArgs:
 
    # HardCode the Burnin
-   #while DigitSec.PIR_SENSE == False:
+   
       #TestTime = datetime.datetime.now()
-      #if datetime.datetime.now().hour > BurnInStart and datetime.datetime.now().hour < BurnInStop :
-      # stop all clocks
-         #rt.stop()
-         #timerETA.stop()
-         #DigitSec.Pir_Sensor_Off()
-         #Dig = DigitsToTest[DigIndex]
-         #DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
-         #SecIndex += 1
-         #if SecIndex > BurnInSec:
-            #SecIndex = 0
-            #DigIndex += 1
-            #if DigIndex > 9:
-               #DigIndex = 0  
-   #DigitSec.Pir_Sensor_On()  
-   #rt.start()
-   #timeETA.start()  
-   # If the time is after is between 2-5 AM
-   # whenever the PIR_SENSE = False. 
-   # turn off the PIR_SENSOR   
-   # rt.stop() and timer.stop()
-   # Burn in [3,4,9,0]
-   # Burn in time 30 minutes for each digit until the are all done
-   # cycle the digits in order
-   # else turn on the PIR_SENSOR
-   # restart the rt.start() and time.start()
-   #if testinput == 'Y' or testinput == 'Yes':
-   #   break
+   # we  need to set the BurnIn State for DigitSec 
+   if TimeForBurnin(BurnInStart, BurnInStop):
+      DigitSec.BurnIn_On()
+   else:
+      DigitSec.BurnIn_Off()
+
+   while DigitSec.PIR_SENSE == False:
+      # if it is the burnin time
+      if DigitSec.BurnIn: 
+         # stop all clocks
+         rt.stop()
+         timerETA.stop()
+         TimerStopped = True
+         Dig = DigitsToTest[DigIndex]
+         DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
+         SecIndex += 1
+         if SecIndex > BurnInSec:
+            SecIndex = 0
+            DigIndex += 1
+            if DigIndex > 9:
+               DigIndex = 0  
+   if TimerStopped:
+      rt.start()
+      timeETA.start()  
+      TimerStopped = False
+   
    # update the trafic every 4 minutes usage to stay under free usage limit 
    sleep(1)
    #break
