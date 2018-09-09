@@ -40,7 +40,7 @@ class RepeatedSyncTimer(object):
       self.next_call += self.interval
       # test to ensure the self.next_call is greater than time
       # this is important when restarting the time
-      if self.next_call > time.time:
+      if self.next_call > time.time():
          self._timer = Timer(self.next_call - time.time(), self._run)
       # otherwise just add 1/2 the interval to current time
       else:
