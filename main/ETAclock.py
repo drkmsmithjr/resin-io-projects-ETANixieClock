@@ -368,7 +368,7 @@ while GoodArgs:
             timerETA.stop()
             TimerStopped = True
          Dig = DigitsToTest[DigIndex]
-         DigitSec.Write_Display([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
+         DigitSec.Write_Display_No_Off([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
          SecIndex += 1
          print("The second Index is: %s" % SecIndex)
          print("The digit Index is: %s" % DigIndex)
@@ -379,6 +379,7 @@ while GoodArgs:
                DigIndex = 0  
       sleep(1)
    if TimerStopped:
+      print("Starting All Clocks")
       rt.start()
       timerETA.start()  
       TimerStopped = False
