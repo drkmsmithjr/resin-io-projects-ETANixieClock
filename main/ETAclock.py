@@ -343,8 +343,8 @@ print("after timer thread call")
 BurnInMinutes = 20
 BurnInStart = 20
 BurnInStop = 22
-DigitsToTest = [3,4,9,0,1,2,5,6,7,8]
-DigitsTimeTest = [.75,.75,.75,1,.1,.1,.1,.1,.1,.1]
+DigitsToTest = [0,3,4,9,0,2,5,6,7,8]
+DigitsTimeTest = [1,.75,.75,.75,1,.1,.1,.1,.1,.1]
 DigIndex = 0
 SecIndex = 0
 BurnInSec = BurnInMinutes*60
