@@ -355,6 +355,8 @@ DigIndex = 0
 SecIndex = 0
 BurnInSec = BurnInMinutes*60
 TimerStopped = False
+TimeForBurnIn(BurnInStart,BurnInStop)
+
 
 while GoodArgs:
 
