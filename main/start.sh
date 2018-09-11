@@ -1,8 +1,17 @@
 #!/usr/bin/bash
 
 #start wifi-connect.  This will start an access point if none is found
-#export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
-#ps ./wifi-connect --portal-ssid="ETANixieClock Connect" --activity-timeout=20
+export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+
+#Is there an active WiFi connection?
+iwgetid -r
+
+if [ $? -eq 0 ]; then
+    printf 'Skipping WiFi Connect\n'
+else
+    printf 'Starting WiFi Connect\n'
+    ./wifi-connect --portal-ssid="ETANixieClock Connect" --activity-timeout=20
+fi
 
 # Default to UTC if no TIMEZONE env variable is set
 echo "Setting time zone to ${TIMEZONE=America/Los_Angeles}"
