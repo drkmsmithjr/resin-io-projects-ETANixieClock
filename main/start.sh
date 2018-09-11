@@ -10,7 +10,7 @@ if [ $? -eq 0 ]; then
     printf 'Skipping WiFi Connect\n'
 else
     printf 'Starting WiFi Connect\n'
-    ./wifi-connect --portal-ssid="ETANixieClock Connect" --activity-timeout=180
+    ./wifi-connect --portal-ssid="ETANixieClock Connect" --activity-timeout=300
 fi
 
 # Default to UTC if no TIMEZONE env variable is set
