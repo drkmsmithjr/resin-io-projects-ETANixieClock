@@ -245,18 +245,24 @@ def updateETA():
          print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
  
 def TimeForBurnIn(BurnInStart, BurnInStop):
+   global DigitSec
 # burnin start and burn in stops are integers that represent 24 hour HOURS
+    # MIDNIGHT is represented as zero.   
     # determine if we need to acount for day change:
    TestTime = datetime.datetime.now()
    if BurnInStart < BurnInStop:
       if TestTime.hour >= BurnInStart and TestTime.hour < BurnInStop :
+         DigitSec.BurnIn_On()
          return True
       else:
+         DigitSec.BurnIn_Off()
          return False
    else:
-      if (TestTime.hour >= BurnInStart and TestTime.hour < 24) or  (TestTime.hour > 0 and TestTime.hour <= BurnInStop) :
+      if (TestTime.hour >= BurnInStart and TestTime.hour < 24) or  (TestTime.hour >= 0 and TestTime.hour <= BurnInStop) :
+         DigitSec.BurnIn_On()
          return True
       else:
+         DigitSec.BurnIn_Off()
          return False
    
 
@@ -341,8 +347,8 @@ print("after timer thread call")
 
 # Burnin Times
 BurnInMinutes = 20
-BurnInStart = 21
-BurnInStop = 23
+BurnInStart = 22
+BurnInStop = 0
 DigitsToTest = [0,3,4,9,1,2,5,6,7,8]
 DigitsTimeTest = [1,.5,.5,.5,.1,.1,.1,.1,.1,.1]
 DigIndex = 0
@@ -356,14 +362,14 @@ while GoodArgs:
    
       #TestTime = datetime.datetime.now()
    # we  need to set the BurnIn State for DigitSec 
-   if TimeForBurnIn(BurnInStart, BurnInStop):
-      DigitSec.BurnIn_On()
-   else:
-      DigitSec.BurnIn_Off()
+   #if TimeForBurnIn(BurnInStart, BurnInStop):
+   #   DigitSec.BurnIn_On()
+   #else:
+   #   DigitSec.BurnIn_Off()
 
    print("The Burnin State %s" % DigitSec.BurnIn)
 
-   while DigitSec.PIR_SENSE == False and DigitSec.BurnIn:
+   while DigitSec.PIR_SENSE == False and TimeForBurnIn(BurnInStart,BurnInStop):
       # if it is the burnin time
       if DigitSec.BurnIn: 
          # stop all clocks
