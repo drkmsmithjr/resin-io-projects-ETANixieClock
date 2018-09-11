@@ -258,7 +258,7 @@ def TimeForBurnIn(BurnInStart, BurnInStop):
          DigitSec.BurnIn_Off()
          return False
    else:
-      if (TestTime.hour >= BurnInStart and TestTime.hour < 24) or  (TestTime.hour > 0 and TestTime.hour <= BurnInStop) :
+      if (TestTime.hour >= BurnInStart and TestTime.hour < 24) or  (TestTime.hour > -1 and TestTime.hour <= BurnInStop) :
          DigitSec.BurnIn_On()
          return True
       else:
