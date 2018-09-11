@@ -258,7 +258,7 @@ def TimeForBurnIn(BurnInStart, BurnInStop, DigitSec2):
          DigitSec2.BurnIn_Off()
          return False
    else:
-      if (TestTime.hour >= BurnInStart and TestTime.hour < 24) or  (TestTime.hour > -1 and TestTime.hour <= BurnInStop) :
+      if (TestTime.hour >= BurnInStart and TestTime.hour < 24) or  (TestTime.hour > -1 and TestTime.hour < BurnInStop) :
          DigitSec2.BurnIn_On()
          return True
       else:
@@ -347,8 +347,8 @@ print("after timer thread call")
 
 # Burnin Times
 BurnInMinutes = 20
-BurnInStart = 23
-BurnInStop = 1
+BurnInStart = 20
+BurnInStop = 22
 DigitsToTest = [0,3,4,9,1,2,5,6,7,8]
 DigitsTimeTest = [1,.5,.75,.5,.1,.1,.1,.1,.1,.1]
 DigIndex = 0
