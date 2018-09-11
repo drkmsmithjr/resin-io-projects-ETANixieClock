@@ -371,24 +371,24 @@ while GoodArgs:
 
    while DigitSec.PIR_SENSE == False and TimeForBurnIn(BurnInStart,BurnInStop):
       # if it is the burnin time
-      if DigitSec.BurnIn: 
+      #if DigitSec.BurnIn: 
          # stop all clocks
-         print ("We are stopping all Clocks")
-         if TimerStopped == False:
-            rt.stop()
-            timerETA.stop()
-            ind = 0
-            TimerStopped = True
-         Dig = DigitsToTest[DigIndex]
-         DigitSec.Write_Display_No_Off([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
-         SecIndex += 1
-         print("The second Index is: %s" % SecIndex)
-         print("The digit Index is: %s" % DigIndex)
-         if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
-            SecIndex = 0
-            DigIndex += 1
-            if DigIndex > 9:
-               DigIndex = 0  
+      print ("We are stopping all Clocks")
+      if TimerStopped == False:
+         rt.stop()
+         timerETA.stop()
+         ind = 0
+         TimerStopped = True
+      Dig = DigitsToTest[DigIndex]
+      DigitSec.Write_Display_No_Off([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
+      SecIndex += 1
+      print("The second Index is: %s" % SecIndex)
+      print("The digit Index is: %s" % DigIndex)
+      if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
+         SecIndex = 0
+         DigIndex += 1
+         if DigIndex > 9:
+            DigIndex = 0  
       sleep(1)
    if TimerStopped:
       print("Starting All Clocks")
