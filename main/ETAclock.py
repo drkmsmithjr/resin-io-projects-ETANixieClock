@@ -244,25 +244,25 @@ def updateETA():
          TravelDurText[x] = directions_result[0]['legs'][0]['duration']['text']  
          print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
  
-def TimeForBurnIn(BurnInStart, BurnInStop, DigitSec2):
-   #global DigitSec
+def TimeForBurnIn(BurnInStart, BurnInStop):
+   global DigitSec
 # burnin start and burn in stops are integers that represent 24 hour HOURS
     # MIDNIGHT is represented as zero.   
     # determine if we need to acount for day change:
    TestTime = datetime.datetime.now()
    if BurnInStart < BurnInStop:
       if TestTime.hour >= BurnInStart and TestTime.hour < BurnInStop :
-         DigitSec2.BurnIn_On()
+         DigitSec.BurnIn_On()
          return True
       else:
-         DigitSec2.BurnIn_Off()
+         DigitSec.BurnIn_Off()
          return False
    else:
       if (TestTime.hour >= BurnInStart and TestTime.hour < 24) or  (TestTime.hour > 0 and TestTime.hour <= BurnInStop) :
-         DigitSec2.BurnIn_On()
+         DigitSec.BurnIn_On()
          return True
       else:
-         DigitSec2.BurnIn_Off()
+         DigitSec.BurnIn_Off()
          return False
    
 
@@ -355,7 +355,7 @@ DigIndex = 0
 SecIndex = 0
 BurnInSec = BurnInMinutes*60
 TimerStopped = False
-TimeForBurnIn(BurnInStart,BurnInStop,DigitSec)
+TimeForBurnIn(BurnInStart,BurnInStop)
 
 
 while GoodArgs:
@@ -371,7 +371,7 @@ while GoodArgs:
 
    print("The Burnin State %s" % DigitSec.BurnIn)
 
-   while DigitSec.PIR_SENSE == False and TimeForBurnIn(BurnInStart,BurnInStop,DigitSec):
+   while DigitSec.PIR_SENSE == False and TimeForBurnIn(BurnInStart,BurnInStop):
       # if it is the burnin time
       #if DigitSec.BurnIn: 
          # stop all clocks
