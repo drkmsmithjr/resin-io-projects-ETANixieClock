@@ -40,5 +40,5 @@ RUN pip install -U googlemaps
 COPY . /app
 
 # run python script when container lands on device
-CMD ["bash", "/app/start.sh"]
+#CMD ["bash", "/app/start.sh"]
 
