@@ -21,6 +21,6 @@ echo "${TIMEZONE}" > /etc/timezone
 dpkg-reconfigure tzdata
 
 # GoogleKey will be passed from Resin
-python /app/ETAclock.py ${GOOGLEKEY}
+#python /app/ETAclock.py ${GOOGLEKEY}
 
 
