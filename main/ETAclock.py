@@ -331,8 +331,8 @@ rt = RepeatedSyncTimer(LoopRate,PrtCurrentTimeSixNixie, datetime.datetime.now())
 
 #sleep(5)
 
-# start the updateETA routine
-updateETATime = 240
+# start the updateETA routine (in seconds between traffic updates)
+updateETATime = 300
 # run to initially get ETA
 updateETA()
 # start time
