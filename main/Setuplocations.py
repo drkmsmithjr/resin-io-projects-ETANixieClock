@@ -19,19 +19,25 @@ locatefile = "/data/locations.txt"
 # GOOGLEKEY is a resinio google key variable or could also be the actual key
 # Setuplocations.py [datafile] key ${GOOGLEKEY}
 
+OkToTestGoogle = False
+
 if len(sys.argv) < 2:
 #blank digits
    locatefile = "/data/locations.txt"
+# python Setuplocation.py [datafile]
 elif len(sys.argv) == 2:
    locatefile = sys.argv[1]
+# python Setuplocations.py key ${GOOGLEKEY}
 elif len(sys.argv) == 3:
    clientkey = sys.argv[2]
+   gmaps = googlemaps.Client(key=clientkey)
+   OkToTestGoogle = True
+# python Setuplocations.py [datafile] key ${GOOGLEKEY}
 elif len(sys.argv) == 4:
    locatefile = sys.argv[1]
    clientkey = sys.argv[3]
-
-# creating a google maps solution
-gmaps = googlemaps.Client(key=clientkey)
+   gmaps = googlemaps.Client(key=clientkey)
+   OkToTestGoogle = True
 
 # check to see if the locations.txt file exists.  If it does not then create it.   
 # otherwise, read
@@ -41,7 +47,6 @@ try:
 except:
    dest = []
    orig = "NEED ORIGIN"
-
 
 while True:
 
@@ -58,7 +63,8 @@ while True:
    print("[R]: Remove a location:")
    print("[M]: Move a location up:")
    print("[O]: Set the Origin:")
-   print("[T]: Test the google locations:")
+   if OkToTestGoogle:
+      print("[T]: Test the google locations:")
    print("[W]: Write the locations file")
    print("[x]: Write and exit")
    
@@ -116,22 +122,23 @@ while True:
          except ValueError:
             print ("This is not a valid address.  Please try again")
    elif raw_option == "T":
-      print("Testing the google maps connection to the individual addresses:")
-      for index,x in enumerate(dest):
-         now = datetime.datetime.now()
-         try:
-            directions_result = gmaps.directions(origin=orig,destination = x['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
-            TravelDuration = directions_result[0]['legs'][0]['duration']['value']
-            TravelDurText = directions_result[0]['legs'][0]['duration']['text']
-            print(x['toplace'] + " " + " Duration: " + TravelDurText)
-         except:
-            print("There was a fault in the directions_result. restablishing connection")
-            gmaps = googlemaps.Client(key=clientkey)
-            directions_result = gmaps.directions(origin=orig,destination = x['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
-            TravelDuration = directions_result[0]['legs'][0]['duration']['value']
-            TravelDurText = directions_result[0]['legs'][0]['duration']['text']  
-            print(x['toplace'] + " " + " Duration: " + TravelDurText)
-      print("-------------------------" + '\n')
+      if OkToTestGoogle:
+         print("Testing the google maps connection to the individual addresses:")
+         for index,x in enumerate(dest):
+            now = datetime.datetime.now()
+            try:
+               directions_result = gmaps.directions(origin=orig,destination = x['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
+               TravelDuration = directions_result[0]['legs'][0]['duration']['value']
+               TravelDurText = directions_result[0]['legs'][0]['duration']['text']
+               print(x['toplace'] + " " + " Duration: " + TravelDurText)
+            except:
+               print("There was a fault in the directions_result. restablishing connection")
+               gmaps = googlemaps.Client(key=clientkey)
+               directions_result = gmaps.directions(origin=orig,destination = x['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
+               TravelDuration = directions_result[0]['legs'][0]['duration']['value']
+               TravelDurText = directions_result[0]['legs'][0]['duration']['text']  
+               print(x['toplace'] + " " + " Duration: " + TravelDurText)
+         print("-------------------------" + '\n')
    elif raw_option == "W":
       with open(locatefile,'w') as f:
          pickle.dump((dest,orig),f)
