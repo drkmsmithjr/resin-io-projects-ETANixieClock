@@ -400,7 +400,6 @@ while GoodArgs:
             DigIndex += 1
             if DigIndex > 9:
                DigIndex = 0  
-         sleep(1)
       else:
          print ("We are stopping only the ETA update clock")
          if ETATimerStopped == False:
@@ -418,9 +417,9 @@ while GoodArgs:
       print("Starting just the ETA update clock")
       # if the stop time is greater than the update ETA length 
       # then update ETA immediately
-      if time.time() - ETAstoptime > updateETATime:
-         updateETA()
-      timerETA.start()  
+      if time.time() - ETAstoptime > updateETATime/2:
+         updateETA()  
+      ETAstarttime = time.time()
       ETATimerStopped = False     
    
    # update the trafic every 4 minutes usage to stay under free usage limit 
