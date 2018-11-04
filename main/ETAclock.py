@@ -332,7 +332,7 @@ rt = RepeatedSyncTimer(LoopRate,PrtCurrentTimeSixNixie, datetime.datetime.now())
 #sleep(5)
 
 # start the updateETA routine (in seconds between traffic updates)
-updateETATime = 300
+updateETATime = 240
 # run to initially get ETA
 updateETA()
 # start time
@@ -355,6 +355,7 @@ DigIndex = 0
 SecIndex = 0
 BurnInSec = BurnInMinutes*60
 TimerStopped = False
+ETATimerStopped = False
 TimeForBurnIn(BurnInStart,BurnInStop,DigitSec)
 
 
@@ -371,32 +372,50 @@ while GoodArgs:
 
    print("The Burnin State %s" % DigitSec.BurnIn)
 
-   while DigitSec.PIR_SENSE == False and TimeForBurnIn(BurnInStart,BurnInStop,DigitSec):
+   # if it is time for Burnin then when no movement is detected we want 
+   # to turn off the clock timer.   
+   # we also want to turn off the timeETA.stop() if no movement is detected
+   # so that we can minimize calls to Google Maps.    We will only update
+   # traffic when movement is detected.    
+
+
+   while DigitSec.PIR_SENSE == False:
       # if it is the burnin time
       #if DigitSec.BurnIn: 
          # stop all clocks
-      print ("We are stopping all Clocks")
-      if TimerStopped == False:
-         rt.stop()
-         timerETA.stop()
-         ind = 0
-         TimerStopped = True
-      Dig = DigitsToTest[DigIndex]
-      DigitSec.Write_Display_No_Off([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
-      SecIndex += 1
-      print("The second Index is: %s" % SecIndex)
-      print("The digit Index is: %s" % DigIndex)
-      if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
-         SecIndex = 0
-         DigIndex += 1
-         if DigIndex > 9:
-            DigIndex = 0  
-      sleep(1)
+      if TimeForBurnIn(BurnInStart,BurnInStop,DigitSec):
+         print ("We are stopping all Clocks")
+         if TimerStopped == False:
+            rt.stop()
+            timerETA.stop()
+            ind = 0
+            TimerStopped = True
+         Dig = DigitsToTest[DigIndex]
+         DigitSec.Write_Display_No_Off([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
+         SecIndex += 1
+         print("The second Index is: %s" % SecIndex)
+         print("The digit Index is: %s" % DigIndex)
+         if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
+            SecIndex = 0
+            DigIndex += 1
+            if DigIndex > 9:
+               DigIndex = 0  
+         sleep(1)
+      else:
+         print ("We are stopping only the ETA update clock")
+         if ETATimerStopped == False:
+            timerETA.stop()
+            ETATimerStopped = True
+
    if TimerStopped:
       print("Starting All Clocks")
       rt.start()
       timerETA.start()  
       TimerStopped = False
+   elif ETATimerStopped:
+      print("Starting just the ETA update clock")
+      timerETA.start()  
+      ETATimerStopped = False     
    
    # update the trafic every 4 minutes usage to stay under free usage limit 
    sleep(1)
