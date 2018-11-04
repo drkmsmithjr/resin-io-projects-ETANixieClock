@@ -415,9 +415,9 @@ while GoodArgs:
       TimerStopped = False
    elif ETATimerStopped:
       print("Starting just the ETA update clock")
-      # if the stop time is greater than the update ETA length 
+      # if the stop time is greater than the update ETA length multiple 
       # then update ETA immediately
-      if time.time() - ETAstoptime > updateETATime:
+      if time.time() - ETAstoptime > updateETATime*.75:
          updateETA()  
       ETAstarttime = time.time()
       ETATimerStopped = False     
