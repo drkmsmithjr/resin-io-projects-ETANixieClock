@@ -407,6 +407,7 @@ while GoodArgs:
             timerETA.stop()
             ETAstoptime = time.time()
             ETATimerStopped = True
+      sleep(1)
 
    if TimerStopped:
       print("Starting All Clocks")
