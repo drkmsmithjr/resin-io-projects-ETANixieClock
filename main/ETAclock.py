@@ -422,6 +422,8 @@ while GoodArgs:
       timerETA.start() 
       ETAstarttime = time.time()
       ETATimerStopped = False     
+   else:
+      print("All timers are on")
    
    # update the trafic every 4 minutes usage to stay under free usage limit 
    sleep(1)
