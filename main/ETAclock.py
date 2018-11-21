@@ -419,6 +419,7 @@ while GoodArgs:
       # then update ETA immediately
       if time.time() - ETAstoptime > updateETATime*.75:
          updateETA()  
+      timerETA.start() 
       ETAstarttime = time.time()
       ETATimerStopped = False     
    
