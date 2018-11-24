@@ -228,27 +228,23 @@ def PrtCurrentTimeSixNixie(timestr):
 def updateETA():
      global clientkey
 	 #create the google maps object using the key
-     ConnectionOK = True
      try:
         gmaps = googlemaps.Client(key=clientkey)
         #gooogle gmaps will need this key to create the object.   
-     except:
-        print("There was trouble creating gmaps client key")
-        ConnectionOK = False
-
-     for x in range (0,len(dest)):
-        now = datetime.datetime.now()
-        print(str(now))
-        if ConnectionOK:
+        for x in range (0,len(dest)):
+           now = datetime.datetime.now()
+           print(str(now))
            directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
            #directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", departure_time = now, traffic_model = "best_guess" )
            TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
            TravelDurText[x] = directions_result[0]['legs'][0]['duration']['text']
-        else:
+           print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
+     except:
+        print("There was trouble creating gmaps client key")
+        for x in range (0,len(dest)):
            TravelDuration[x] = 1
            TravelDurText[x] = "ERROR"
-        #ETA = now + datetime.timedelta(seconds=TravelDuration[x])
-        print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
+           print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
 
  
 def TimeForBurnIn(BurnInStart, BurnInStop, DigitSec2):
