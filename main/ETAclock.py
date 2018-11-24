@@ -226,11 +226,15 @@ def PrtCurrentTimeSixNixie(timestr):
     pre_BlankCntrl = BlankCntrl
 
 def updateETA():
+     global clientkey
+	 #create the google maps object using the key
+	 #gooogle gmaps will need this key to create the object.   
 
      for x in range (0,len(dest)):
       now = datetime.datetime.now()
       print(str(now))
       try:
+	     gmaps = googlemaps.Client(key=clientkey)
          directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
       #directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", departure_time = now, traffic_model = "best_guess" )
          TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
@@ -280,6 +284,7 @@ if len(sys.argv) < 2:
    print(" Please include google clientkey as parameter")
    GoodArgs = False
 else:
+   # this key is needed for google maps ETA to work    Need to have a google maps API account.   
    clientkey = sys.argv[1]
 
 #Hard code initial origin and ETA locations
@@ -318,9 +323,6 @@ DigitSec.Pir_Sensor_On()
 pre_time_digits = [0,0,0,0,0,0]
 pre_BlankCntrl = [False,False,False,False,False]
       
-#create the google maps object using the key
-gmaps = googlemaps.Client(key=clientkey)
-#sleep(10)
 
 # start the timer circuit (first parameter is the interval in seconds)
 # this circuit will then print the time to the screen and loops through the times 
