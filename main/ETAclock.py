@@ -217,8 +217,8 @@ def PrtCurrentTimeSixNixie(timestr):
           time.sleep(.05)
        DigitSec.Write_Display(time_digits,BlankCntrl)
        #print(str(now), time_digits)
-       print("PrtCurrentTimeSixNixie: Displayed Time %s"  % str(now))
-       print("PrtCurrentTimeSixNixie: tube Display %s"  % time_digits)
+       print("Prt-SixNixie: Displayed Time %s"  % str(now))
+       print("Prt-SixNixie: tube Display   %s"  % time_digits)
     ind += 1
     if ind > time_series + location_series*len(TravelDuration):
        ind = 0
