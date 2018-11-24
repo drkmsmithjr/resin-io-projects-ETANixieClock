@@ -239,6 +239,7 @@ def updateETA():
            TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
            TravelDurText[x] = directions_result[0]['legs'][0]['duration']['text']
            print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
+        print("Successful query to google for ETA")
      except:
         print("There was trouble creating gmaps client key")
         for x in range (0,len(dest)):
