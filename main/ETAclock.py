@@ -216,7 +216,9 @@ def PrtCurrentTimeSixNixie(timestr):
              DigitSec.Write_Display(time_digits,[False,False,False,True,True,True])
           time.sleep(.05)
        DigitSec.Write_Display(time_digits,BlankCntrl)
-       print(str(now), time_digits)
+       #print(str(now), time_digits)
+       print("PrtCurrentTimeSixNixie: Displayed Time %s"  % str(now))
+       print("PrtCurrentTimeSixNixie: tube Display %s"  % time_digits)
     ind += 1
     if ind > time_series + location_series*len(TravelDuration):
        ind = 0
@@ -394,7 +396,7 @@ while GoodArgs:
          DigitSec.Write_Display_No_Off([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
          SecIndex += 1
          print("The second Index is: %s" % SecIndex)
-         print("The digit Index is: %s" % DigIndex)
+         print("The digit Index is:  %s" % DigIndex)
          if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
             SecIndex = 0
             DigIndex += 1
