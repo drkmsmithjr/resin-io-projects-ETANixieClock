@@ -234,7 +234,7 @@ def updateETA():
       now = datetime.datetime.now()
       print(str(now))
       try:
-	     gmaps = googlemaps.Client(key=clientkey)
+         gmaps = googlemaps.Client(key=clientkey)
          directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
       #directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", departure_time = now, traffic_model = "best_guess" )
          TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
