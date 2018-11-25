@@ -243,7 +243,7 @@ def updateETA():
      except:
         print("There was trouble creating gmaps client key")
         for x in range (0,len(dest)):
-           TravelDuration[x] = 1
+           #TravelDuration[x] = 1
            TravelDurText[x] = "ERROR"
            print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
 
