@@ -216,7 +216,9 @@ def PrtCurrentTimeSixNixie(timestr):
              DigitSec.Write_Display(time_digits,[False,False,False,True,True,True])
           time.sleep(.05)
        DigitSec.Write_Display(time_digits,BlankCntrl)
-       print(str(now), time_digits)
+       #print(str(now), time_digits)
+       print("Prt-SixNixie: Displayed Time %s"  % str(now))
+       print("Prt-SixNixie: tube Display   %s"  % time_digits)
     ind += 1
     if ind > time_series + location_series*len(TravelDuration):
        ind = 0
@@ -224,25 +226,27 @@ def PrtCurrentTimeSixNixie(timestr):
     pre_BlankCntrl = BlankCntrl
 
 def updateETA():
+     global clientkey
+	 #create the google maps object using the key
+     try:
+        gmaps = googlemaps.Client(key=clientkey)
+        #gooogle gmaps will need this key to create the object.   
+        for x in range (0,len(dest)):
+           now = datetime.datetime.now()
+           print(str(now))
+           directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
+           #directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", departure_time = now, traffic_model = "best_guess" )
+           TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
+           TravelDurText[x] = directions_result[0]['legs'][0]['duration']['text']
+           print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
+        print("Successful query to google for ETA")
+     except:
+        print("There was trouble creating gmaps client key")
+        for x in range (0,len(dest)):
+           #TravelDuration[x] = 1
+           TravelDurText[x] = "ERROR"
+           print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
 
-     for x in range (0,len(dest)):
-      now = datetime.datetime.now()
-      print(str(now))
-      try:
-         directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
-      #directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", departure_time = now, traffic_model = "best_guess" )
-         TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
-         TravelDurText[x] = directions_result[0]['legs'][0]['duration']['text']
-      #ETA = now + datetime.timedelta(seconds=TravelDuration[x])
-         print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
-      except:
-         print("There was a fault in the directions_result. restablishing connection")
-         gmaps = googlemaps.Client(key=clientkey)
-         directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", avoid="tolls", departure_time = now, traffic_model = "best_guess" )
-         #directions_result = gmaps.directions(origin=orig,destination = dest[x]['toaddress'], mode = "driving", departure_time = now, traffic_model = "best_guess" )
-         TravelDuration[x] = directions_result[0]['legs'][0]['duration']['value']
-         TravelDurText[x] = directions_result[0]['legs'][0]['duration']['text']  
-         print(dest[x]['toplace'] + " " + " Duration: " + TravelDurText[x])
  
 def TimeForBurnIn(BurnInStart, BurnInStop, DigitSec2):
    #global DigitSec
@@ -278,6 +282,7 @@ if len(sys.argv) < 2:
    print(" Please include google clientkey as parameter")
    GoodArgs = False
 else:
+   # this key is needed for google maps ETA to work    Need to have a google maps API account.   
    clientkey = sys.argv[1]
 
 #Hard code initial origin and ETA locations
@@ -316,9 +321,6 @@ DigitSec.Pir_Sensor_On()
 pre_time_digits = [0,0,0,0,0,0]
 pre_BlankCntrl = [False,False,False,False,False]
       
-#create the google maps object using the key
-gmaps = googlemaps.Client(key=clientkey)
-#sleep(10)
 
 # start the timer circuit (first parameter is the interval in seconds)
 # this circuit will then print the time to the screen and loops through the times 
@@ -394,7 +396,7 @@ while GoodArgs:
          DigitSec.Write_Display_No_Off([Dig,Dig,Dig,Dig,Dig,Dig],[True,True,True,True,True,True]) 
          SecIndex += 1
          print("The second Index is: %s" % SecIndex)
-         print("The digit Index is: %s" % DigIndex)
+         print("The digit Index is:  %s" % DigIndex)
          if SecIndex > BurnInSec*DigitsTimeTest[DigIndex]:
             SecIndex = 0
             DigIndex += 1
@@ -419,8 +421,11 @@ while GoodArgs:
       # then update ETA immediately
       if time.time() - ETAstoptime > updateETATime*.75:
          updateETA()  
+      timerETA.start() 
       ETAstarttime = time.time()
       ETATimerStopped = False     
+   else:
+      print("All timers are on")
    
    # update the trafic every 4 minutes usage to stay under free usage limit 
    sleep(1)

@@ -92,7 +92,10 @@ class NixieTube():
               self.CurrentDelay = PirDelay*60+1
            else:
               self.PIR_SENSE = True
-           print(self.PIR_SENSE,self.CurrentDelay,GPIO.input(PIR_SENSE))
+           #print(self.PIR_SENSE,self.CurrentDelay,GPIO.input(PIR_SENSE))
+           print("PirSample: PIR_SENSE (motion detected): %s" % self.PIR_SENSE)
+           print("PirSample: Time since last motion     : %s" % self.CurrentDelay)
+           print("PirSample: GPIO input for PIR_SENSE   : %s" % GPIO.input(PIR_SENSE))
            next_call = next_call + PirSampling
            time.sleep(next_call - time.time())
         else:
