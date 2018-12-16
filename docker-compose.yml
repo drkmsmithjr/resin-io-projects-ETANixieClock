@@ -7,7 +7,7 @@ services:
         volumes: 
             - 'resin-data:/data'
         privileged: true
-        restart: always
+#        restart: always
         network_mode: host
         labels:
            io.resin.features.dbus: '1'
