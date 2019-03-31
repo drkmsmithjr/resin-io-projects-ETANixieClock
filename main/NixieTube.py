@@ -221,7 +221,7 @@ class NixieTube():
         # spin times .
         # there is a delay=2ms between displays
         # the total time for the spin is going to be write_display * spin.   
-        delay = .002
+        delay = .001
         # power on the display if it is off.   
         self.Power_On()
         for y in range (0,spin):
