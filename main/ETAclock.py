@@ -208,7 +208,7 @@ def PrtCurrentTimeSixNixie(timestr):
              DigitSec.Write_Display(time_digits,[True,True,True,True,False,False])
           else:
              DigitSec.Write_Display(time_digits,[False,True,True,True,False,False])
-          time.sleep(.05)
+          time.sleep(.001)
        else:
           if Hour_1digit == 1:
              DigitSec.Write_Display(time_digits,[False,False,True,True,True,True])
