@@ -349,7 +349,9 @@ print("after timer thread call")
 
 # Burnin Times
 BurnInMinutes = 20
+# STart Time hour (8pm)
 BurnInStart = 20
+# stop time hour( 1am)
 BurnInStop = 1
 # Digit Test Order.   
 DigitsToTest = [0,3,4,9,1,2,5,6,7,8]
