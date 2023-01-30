@@ -14,7 +14,6 @@ RUN apt-get update \
 
 RUN pip install python-networkmanager
 
-
 # install wireless tool
 # Use apt-get to install dependencies
 RUN apt-get update && apt-get install -yq --no-install-recommends \
@@ -28,6 +27,9 @@ RUN curl https://api.github.com/repos/balena-io/wifi-connect/releases/latest -s 
     | grep -hoP 'browser_download_url": "\K.*%%RESIN_ARCH%%\.tar\.gz' \
     | xargs -n1 curl -Ls \
     | tar -xvz -C /usr/src/app/   
+
+# Since we are using python 2.7, Google maps requires Requests <=2.28
+RUN pip install requests==2.27.1
 
 # this is for RIP.GPIO install
 COPY ./requirements.txt /requirements.txt 
