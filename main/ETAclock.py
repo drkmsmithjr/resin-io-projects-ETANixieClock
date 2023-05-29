@@ -334,7 +334,7 @@ rt = RepeatedSyncTimer(LoopRate,PrtCurrentTimeSixNixie, datetime.datetime.now())
 #sleep(5)
 
 # start the updateETA routine (in seconds between traffic updates)
-updateETATime = 240
+updateETATime = 1200
 # run to initially get ETA
 updateETA()
 # start time
@@ -356,7 +356,7 @@ BurnInStop = 1
 # Digit Test Order.   
 DigitsToTest = [0,3,4,9,1,2,5,6,7,8]
 # The test time is BurnInMinutes when weighted at 1.0
-DigitsTimeTest = [.8,1.5,1.5,.8,.1,.1,.1,0.3,.1,0.3]
+DigitsTimeTest = [1.5,1.5,1.5,.8,.1,.1,.1,0.3,.1,0.3]
 DigIndex = 0
 SecIndex = 0
 BurnInSec = BurnInMinutes*60

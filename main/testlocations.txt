@@ -1,0 +1,32 @@
+((lp0
+(dp1
+S'toaddress'
+p2
+S'1 Enterprise, Aliso Viejo, Ca 92656'
+p3
+sS'toplace'
+p4
+S'work'
+p5
+sa(dp6
+S'toaddress'
+p7
+S'32575 Golden Lantern, Dana Point, CA 92629'
+p8
+sS'toplace'
+p9
+S'CVCS'
+p10
+sa(dp11
+S'toaddress'
+p12
+S'john wayne airport, santa ana, CA'
+p13
+sS'toplace'
+p14
+S'airport'
+p15
+saS'33421 Surf Shoal, Dana Point, CA 92629'
+p16
+tp17
+.
